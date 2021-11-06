@@ -58,4 +58,18 @@ function getLocalStorage() {
 }
 window.addEventListener('load', getLocalStorage)
 
+const body = document.querySelector('body');
+body.style.backgroundImage = `"url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${*****}.jpg')"`;
+
+function getRandomNum(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random()* (max - min)) + min;
+}
+
+function setBg() {
+    let timeOfDay = '';
+    let bgNum = '';
+}
+getRandomNum(1, 20)
 showTime()
