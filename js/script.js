@@ -58,8 +58,6 @@ function getLocalStorage() {
 }
 window.addEventListener('load', getLocalStorage)
 
-const body = document.querySelector('body');
-body.style.backgroundImage = `"url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${*****}.jpg')"`;
 
 function getRandomNum(min, max) {
     min = Math.ceil(min);
@@ -68,8 +66,13 @@ function getRandomNum(min, max) {
 }
 
 function setBg() {
-    let timeOfDay = '';
-    let bgNum = '';
+    let timeOfDay = getTimeOfDay();
+    let bgNum = getRandomNum(1, 20).toString().padStart(2, "0");
+    body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/evening/${bgNum}.jpg')`;
 }
+
+const body = document.querySelector('body');
+
 getRandomNum(1, 20)
 showTime()
+setBg()
