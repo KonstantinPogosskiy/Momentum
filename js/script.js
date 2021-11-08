@@ -37,7 +37,7 @@ function getTimeOfDay(param) {
     } else if (param > 3 && param < 10) {
         return 'morning';
     } else if (param >= 10 && param < 18) {
-        return 'day';
+        return 'afternoon';
     } else if (param >= 18) {
         return 'evening';
     }
@@ -73,7 +73,11 @@ function setBg() {
     const hours = date.getHours();
     const timeOfDay = getTimeOfDay(hours);
     let bgNum = randomNum.toString().padStart(2, "0");
-    body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`;
+    const img = new Image();
+    img.src = `https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg`;
+        img.onload = () => {
+            body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`;
+        };
 }
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
