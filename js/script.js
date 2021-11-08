@@ -32,15 +32,15 @@ function showGreeting() {
 }
 
 function getTimeOfDay(param) {
-    if(param <= 3) {
-        return 'night';
-    } else if (param > 3 && param < 10) {
+   if (param > 3 && param < 10) {
         return 'morning';
-    } else if (param >= 10 && param < 18) {
+    } else if (param > 9 && param < 18) {
         return 'afternoon';
-    } else if (param >= 18) {
+    } else if (param > 17 && param < 22) {
         return 'evening';
-    }
+    } else if(param < 4 || param > 21) {
+       return 'night';
+   }
 }
 
 //Entered and save message
