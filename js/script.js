@@ -45,12 +45,12 @@ function getTimeOfDay(param) {
 
 //Slides
 const body = document.querySelector('body');
-let randomNum = getRandomNum();
+let randomNum = getRandomNum(1,20);
 
-function getRandomNum() {
-    min = Math.ceil(1);
-    max = Math.floor(20);
-    return Math.floor(Math.random()* (20 - 1)) + 1;
+function getRandomNum(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random()* (max - min)) + min;
 }
 
 function setBg() {
@@ -113,13 +113,14 @@ async function getWeather() {
 //Quotes
 const quotes = document.querySelector('.quote');
 const author = document.querySelector('.author');
+let randomQuote = getRandomNum(1,7);
 
 async function getQuotes() {
     const quote = 'data.json';
     const res = await fetch(quote);
     const data = await res.json();
-    quotes.textContent = `"${data[0].text}"`;
-    author.textContent = data[0].author;
+    quotes.textContent = `"${data[randomQuote].text}"`;
+    author.textContent = data[randomQuote].author;
 }
 
 //Entered and save message
