@@ -110,6 +110,17 @@ async function getWeather() {
     wind.textContent = `Wind speed: ${data.wind.speed} m/s`
 }
 
+//Quotes
+const quotes = document.querySelector('.quote');
+const author = document.querySelector('.author');
+
+async function getQuotes() {
+    const quote = 'data.json';
+    const res = await fetch(quote);
+    const data = await res.json();
+    quotes.textContent = `"${data[0].text}"`;
+    author.textContent = data[0].author;
+}
 
 //Entered and save message
 const name = document.querySelector('.name');
@@ -131,4 +142,6 @@ window.addEventListener('load', getLocalStorage)
 getWeather()
 showTime()
 setBg()
+getQuotes()
+
 
