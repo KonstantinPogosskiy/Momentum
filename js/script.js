@@ -43,21 +43,6 @@ function getTimeOfDay(param) {
    }
 }
 
-//Entered and save message
-const name = document.querySelector('.name');
-
-function setLocalStorage() {
-    localStorage.setItem('name', name.value);
-}
-window.addEventListener('beforeunload', setLocalStorage)
-
-function getLocalStorage() {
-    if (localStorage.getItem('name')) {
-        name.value = localStorage.getItem('name');
-    }
-}
-window.addEventListener('load', getLocalStorage)
-
 //Slides
 const body = document.querySelector('body');
 let randomNum = getRandomNum();
@@ -102,6 +87,48 @@ function getSlidePrev() {
     setBg()
 }
 
+//Weather
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const humidity = document.querySelector('.humidity');
+const wind = document.querySelector('.wind');
+const city = document.querySelector('.city');
+
+city.addEventListener('change', getWeather);
+
+async function getWeather() {
+    let location = city.value;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=en&appid=36deaab1513692e46c4dfc97fe0d547f&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    weatherIcon.className = 'weather-icon owf';
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${Math.floor(data.main.temp)}°C`;
+    weatherDescription.textContent = data.weather[0].description;
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+    wind.textContent = `Wind speed: ${data.wind.speed} m/s`
+}
+
+
+//Entered and save message
+const name = document.querySelector('.name');
+
+function setLocalStorage() {
+    localStorage.setItem('name', name.value);
+    localStorage.setItem('city', city.value);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+function getLocalStorage() {
+    if (localStorage.getItem('name' || 'city')) {
+        name.value = localStorage.getItem('name');
+        city.value = localStorage.getItem('city');
+    }
+}
+window.addEventListener('load', getLocalStorage)
+
+getWeather()
 showTime()
 setBg()
 
