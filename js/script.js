@@ -45,6 +45,10 @@ function getTimeOfDay(param) {
 
 //Slides
 const body = document.querySelector('body');
+const slideNext = document.querySelector('.slide-next');
+const slidePrev = document.querySelector('.slide-prev');
+slideNext.addEventListener('click', getSlideNext);
+slidePrev.addEventListener('click', getSlidePrev);
 let randomNum = getRandomNum(1,20);
 
 function getRandomNum(min, max) {
@@ -64,10 +68,6 @@ function setBg() {
             body.style.backgroundImage = `url('https://raw.githubusercontent.com/rolling-scopes-school/stage1-tasks/assets/images/${timeOfDay}/${bgNum}.jpg')`;
         };
 }
-const slideNext = document.querySelector('.slide-next');
-const slidePrev = document.querySelector('.slide-prev');
-slideNext.addEventListener('click', getSlideNext);
-slidePrev.addEventListener('click', getSlidePrev);
 
 function getSlideNext() {
     if(randomNum < 20) {
@@ -113,6 +113,7 @@ async function getWeather() {
 //Quotes
 const quotes = document.querySelector('.quote');
 const author = document.querySelector('.author');
+const changeQuote = document.querySelector('.change-quote');
 let randomQuote = getRandomNum(1,7);
 
 async function getQuotes() {
@@ -123,6 +124,10 @@ async function getQuotes() {
     author.textContent = data[randomQuote].author;
 }
 
+changeQuote.addEventListener('click', () => {
+   randomQuote = getRandomNum(1,7);
+    getQuotes()
+})
 //Entered and save message
 const name = document.querySelector('.name');
 
@@ -144,5 +149,4 @@ getWeather()
 showTime()
 setBg()
 getQuotes()
-
 
