@@ -128,6 +128,40 @@ changeQuote.addEventListener('click', () => {
    randomQuote = getRandomNum(1,7);
     getQuotes()
 })
+
+//Audio player
+const play = document.querySelector('.play');
+const next = document.querySelector('.play-next');
+const prev = document.querySelector('.play-prev');
+let isPlay = false;
+let playNum = 0;
+const audio = new Audio();
+
+function playAudio() {
+    audio.src = playList[playNum].src;
+    play.classList.toggle('pause')
+    if (!isPlay) {
+        audio.currentTime = 0;
+        audio.play();
+        isPlay = true;
+    } else if (isPlay) {
+        audio.pause();
+        isPlay = false;
+    }
+}
+
+function nextPlay() {
+    playNum++
+}
+
+function prevPlay() {
+    playNum--
+}
+
+play.addEventListener('click', playAudio);
+next.addEventListener('click', nextPlay);
+prev.addEventListener('click', prevPlay);
+
 //Entered and save message
 const name = document.querySelector('.name');
 
@@ -149,4 +183,3 @@ getWeather()
 showTime()
 setBg()
 getQuotes()
-
