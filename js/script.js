@@ -151,11 +151,31 @@ function playAudio() {
 }
 
 function nextPlay() {
-    playNum++
+    if (playNum < playList.length -1) {
+        isPlay = false;
+        playNum++
+        playAudio()
+        play.classList.add('pause')
+    } else {
+        isPlay = false;
+        playNum = 0
+        playAudio()
+        play.classList.add('pause')
+    }
 }
 
 function prevPlay() {
-    playNum--
+    if(playNum === 0) {
+        isPlay = false;
+        playNum = playList.length -1
+        playAudio()
+        play.classList.add('pause')
+    } else {
+        isPlay = false;
+        playNum--
+        playAudio()
+        play.classList.add('pause')
+    }
 }
 
 play.addEventListener('click', playAudio);
