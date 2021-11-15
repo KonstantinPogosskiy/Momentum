@@ -43,6 +43,23 @@ function getTimeOfDay(param) {
    }
 }
 
+//Entered and save message
+const name = document.querySelector('.name');
+
+function setLocalStorage() {
+    localStorage.setItem('name', name.value);
+    localStorage.setItem('city', city.value);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+function getLocalStorage() {
+    if (localStorage.getItem('name' || 'city')) {
+        name.value = localStorage.getItem('name');
+        city.value = localStorage.getItem('city');
+    }
+}
+window.addEventListener('load', getLocalStorage);
+
 //Slides
 const body = document.querySelector('body');
 const slideNext = document.querySelector('.slide-next');
@@ -94,7 +111,6 @@ const weatherDescription = document.querySelector('.weather-description');
 const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 const city = document.querySelector('.city');
-
 city.addEventListener('change', getWeather);
 
 async function getWeather() {
@@ -109,6 +125,7 @@ async function getWeather() {
     humidity.textContent = `Humidity: ${data.main.humidity}%`;
     wind.textContent = `Wind speed: ${data.wind.speed} m/s`
 }
+getWeather()
 
 //Quotes
 const quotes = document.querySelector('.quote');
@@ -182,24 +199,7 @@ play.addEventListener('click', playAudio);
 next.addEventListener('click', nextPlay);
 prev.addEventListener('click', prevPlay);
 
-//Entered and save message
-const name = document.querySelector('.name');
 
-function setLocalStorage() {
-    localStorage.setItem('name', name.value);
-    localStorage.setItem('city', city.value);
-}
-window.addEventListener('beforeunload', setLocalStorage)
-
-function getLocalStorage() {
-    if (localStorage.getItem('name' || 'city')) {
-        name.value = localStorage.getItem('name');
-        city.value = localStorage.getItem('city');
-    }
-}
-window.addEventListener('load', getLocalStorage)
-
-getWeather()
 showTime()
 setBg()
 getQuotes()
