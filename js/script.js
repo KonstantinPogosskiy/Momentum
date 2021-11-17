@@ -156,6 +156,7 @@ const audio = new Audio();
 
 function playAudio() {
     audio.src = playList[playNum].src;
+
     play.classList.toggle('pause')
     if (!isPlay) {
         audio.currentTime = 0;
@@ -198,6 +199,17 @@ function prevPlay() {
 play.addEventListener('click', playAudio);
 next.addEventListener('click', nextPlay);
 prev.addEventListener('click', prevPlay);
+
+const list = document.querySelector('.play-list');
+
+
+playList.forEach(el => {
+    const li = document.createElement('li');
+    list.append(li);
+    li.classList.add('play-item');
+    li.textContent = el.title;
+
+})
 
 
 showTime()
