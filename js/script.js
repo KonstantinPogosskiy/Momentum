@@ -142,8 +142,10 @@ async function getQuotes() {
 }
 
 changeQuote.addEventListener('click', () => {
-   randomQuote = getRandomNum(1,7);
+    randomQuote = getRandomNum(1,7);
+    changeQuote.classList.toggle('rotate-quote');
     getQuotes()
+
 })
 
 //Audio player

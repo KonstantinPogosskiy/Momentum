@@ -82,7 +82,12 @@ body {
   outline: 0;
   opacity: .8;
   cursor: pointer;
-  transition: .3s;  
+  transition: .3s;
+}
+
+.rotate-quote {
+  transition: all 1s ease-out;
+  transform: rotate(-180deg);
 }
 
 .player-icon:hover,
