@@ -160,7 +160,7 @@ let trek = ''
 function playAudio() {
     audio.src = playList[playNum].src;
     trek = playList[playNum].title;
-    choseTrek()
+    selectionTrack()
     play.classList.toggle('pause')
     if (!isPlay) {
         audio.currentTime = 0;
@@ -213,7 +213,7 @@ playList.forEach(el => {
     li.textContent = el.title;
 })
 
-function choseTrek() {
+function selectionTrack() {
     if(trek === playList[playNum].title) {
         let play = document.querySelectorAll('.play-item')
         play[playNum].style.color = 'red'
