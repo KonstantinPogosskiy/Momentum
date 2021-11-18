@@ -155,10 +155,12 @@ const prev = document.querySelector('.play-prev');
 let isPlay = false;
 let playNum = 0;
 const audio = new Audio();
+let trek = ''
 
 function playAudio() {
     audio.src = playList[playNum].src;
-
+    trek = playList[playNum].title;
+    choseTrek()
     play.classList.toggle('pause')
     if (!isPlay) {
         audio.currentTime = 0;
@@ -204,14 +206,19 @@ prev.addEventListener('click', prevPlay);
 
 const list = document.querySelector('.play-list');
 
-
 playList.forEach(el => {
     const li = document.createElement('li');
     list.append(li);
     li.classList.add('play-item');
     li.textContent = el.title;
-
 })
+
+function choseTrek() {
+    if(trek === playList[playNum].title) {
+        let play = document.querySelectorAll('.play-item')
+        play[playNum].style.color = 'red'
+    }
+}
 
 
 showTime()
