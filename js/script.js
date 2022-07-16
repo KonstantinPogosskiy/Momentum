@@ -142,7 +142,7 @@ async function getQuotes() {
 }
 
 changeQuote.addEventListener('click', () => {
-    randomQuote = getRandomNum(5,9);
+    randomQuote = getRandomNum(0,7);
     changeQuote.classList.add('rotate-quote');
     getQuotes()
 
