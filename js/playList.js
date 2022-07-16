@@ -18,6 +18,14 @@ const playList = [
     {
         title: 'Johny Cash - I Walk The Line',
         src: './assets/sounds/Johny Cash - I Walk The Line.mp3',
+    },
+    {
+        title: 'Michael Jackson - Thriller',
+        src: './assets/sounds/Michel Jackson - Thriller.mp3',
+    },
+    {
+        title: 'Sting - Fields of gold',
+        src: './assets/sounds/Sting - Fields of gold.mp3',
     }
 ]
 

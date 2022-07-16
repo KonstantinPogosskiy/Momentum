@@ -1,3 +1,26 @@
+//Weather
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const humidity = document.querySelector('.humidity');
+const wind = document.querySelector('.wind');
+const city = document.querySelector('.city');
+city.addEventListener('change', getWeather);
+
+async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${localStorage.getItem('city')}&lang=en&appid=36deaab1513692e46c4dfc97fe0d547f&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    weatherIcon.className = 'weather-icon owf';
+    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+    temperature.textContent = `${Math.floor(data.main.temp)}°C`;
+    weatherDescription.textContent = data.weather[0].description;
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+    wind.textContent = `Wind speed: ${data.wind.speed} m/s`
+}
+
+getWeather()
+
 //Show time
 const time = document.querySelector('.time');
 
@@ -104,29 +127,6 @@ function getSlidePrev() {
     setBg()
 }
 
-//Weather
-const weatherIcon = document.querySelector('.weather-icon');
-const temperature = document.querySelector('.temperature');
-const weatherDescription = document.querySelector('.weather-description');
-const humidity = document.querySelector('.humidity');
-const wind = document.querySelector('.wind');
-const city = document.querySelector('.city');
-city.addEventListener('change', getWeather);
-
-async function getWeather() {
-    let location = city.value;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&lang=en&appid=36deaab1513692e46c4dfc97fe0d547f&units=metric`;
-    const res = await fetch(url);
-    const data = await res.json();
-    weatherIcon.className = 'weather-icon owf';
-    weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    temperature.textContent = `${Math.floor(data.main.temp)}°C`;
-    weatherDescription.textContent = data.weather[0].description;
-    humidity.textContent = `Humidity: ${data.main.humidity}%`;
-    wind.textContent = `Wind speed: ${data.wind.speed} m/s`
-}
-getWeather()
-
 //Quotes
 const quotes = document.querySelector('.quote');
 const author = document.querySelector('.author');
@@ -142,8 +142,8 @@ async function getQuotes() {
 }
 
 changeQuote.addEventListener('click', () => {
-    randomQuote = getRandomNum(1,7);
-    changeQuote.classList.toggle('rotate-quote');
+    randomQuote = getRandomNum(5,9);
+    changeQuote.classList.add('rotate-quote');
     getQuotes()
 
 })
@@ -152,59 +152,66 @@ changeQuote.addEventListener('click', () => {
 const play = document.querySelector('.play');
 const next = document.querySelector('.play-next');
 const prev = document.querySelector('.play-prev');
+const list = document.querySelector('.play-list');
 let isPlay = false;
 let playNum = 0;
 const audio = new Audio();
 let trek = ''
 
-function playAudio() {
-    audio.src = playList[playNum].src;
-    trek = playList[playNum].title;
-    selectionTrack()
-    play.classList.toggle('pause')
-    if (!isPlay) {
-        audio.currentTime = 0;
-        audio.play();
-        isPlay = true;
-    } else if (isPlay) {
-        audio.pause();
-        isPlay = false;
-    }
-}
-
-function nextPlay() {
-    if (playNum < playList.length -1) {
-        isPlay = false;
-        playNum++
-        playAudio()
-        play.classList.add('pause')
-    } else {
-        isPlay = false;
-        playNum = 0
-        playAudio()
-        play.classList.add('pause')
-    }
-}
-
-function prevPlay() {
-    if(playNum === 0) {
-        isPlay = false;
-        playNum = playList.length -1
-        playAudio()
-        play.classList.add('pause')
-    } else {
-        isPlay = false;
-        playNum--
-        playAudio()
-        play.classList.add('pause')
-    }
-}
-
 play.addEventListener('click', playAudio);
 next.addEventListener('click', nextPlay);
 prev.addEventListener('click', prevPlay);
 
-const list = document.querySelector('.play-list');
+
+
+function playAudio() {
+    audio.src = playList[playNum].src;
+    trek = playList[playNum].title;
+    selectionTrack()
+
+    if (!isPlay) {
+        audio.currentTime = 0;
+        audio.play();
+        isPlay = true;
+        play.classList.add('pause')
+    } else if (isPlay) {
+        audio.pause();
+        isPlay = false;
+        play.classList.remove('pause')
+    }
+}
+
+function nextPlay() {
+
+    let play = document.querySelectorAll('.play-item')
+    play[playNum].style.color = 'white'
+
+    if (playNum < playList.length -1) {
+        isPlay = false;
+        playNum++
+        playAudio()
+    } else {
+        isPlay = false;
+        playNum = 0
+        playAudio()
+    }
+}
+
+function prevPlay() {
+
+    let play = document.querySelectorAll('.play-item')
+    play[playNum].style.color = 'white'
+
+    if(playNum === 0) {
+        isPlay = false;
+        playNum = playList.length -1
+        playAudio()
+    } else {
+        isPlay = false;
+        playNum--
+        playAudio()
+    }
+}
 
 playList.forEach(el => {
     const li = document.createElement('li');
@@ -214,8 +221,9 @@ playList.forEach(el => {
 })
 
 function selectionTrack() {
+    let play = document.querySelectorAll('.play-item')
+
     if(trek === playList[playNum].title) {
-        let play = document.querySelectorAll('.play-item')
         play[playNum].style.color = 'red'
     }
 }
